@@ -1,0 +1,11 @@
+app:
+  port: 3000
+
+
+db:
+  driver: "mysql"
+  user: "root"
+  password: "oa70420400siam"
+  hostname: localhost
+  port: 3306
+  database: "golang"
