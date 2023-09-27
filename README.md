@@ -3,6 +3,7 @@
 This guide provides a step-by-step tutorial on how to connect to a MySQL database using the Go programming language (Golang). Connecting to a database is a fundamental task in many applications, and Go provides robust libraries for working with various databases, including MySQL.
 
 **Prerequisites**
+
 Before you start, make sure you have the following prerequisites installed:
 
 **Go**: Ensure you have Go installed on your system. You can download it from the official Go website.
