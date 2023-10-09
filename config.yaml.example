@@ -4,8 +4,8 @@ app:
 
 db:
   driver: "mysql"
-  user: "root"
-  password: "oa70420400siam"
+  user: "test"
+  password: "test"
   hostname: localhost
   port: 3306
-  database: "golang"
+  database: "test"
