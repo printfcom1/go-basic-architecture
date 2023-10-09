@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/go-architecture/handler"
+	"github.com/go-architecture/logs"
 	"github.com/go-architecture/repository"
 	"github.com/go-architecture/service"
 	_ "github.com/go-sql-driver/mysql"
@@ -32,8 +33,9 @@ func main() {
 
 	router.HandleFunc("/customers", customerHandler.GetCustomers).Methods(http.MethodGet)
 	router.HandleFunc("/customers/{customerID:[0-9]+}", customerHandler.GetCustomerById).Methods(http.MethodGet)
-
+	logs.Info("server start at port 3000")
 	http.ListenAndServe(":3000", router)
+
 }
 
 func initConfic() {
@@ -72,5 +74,6 @@ func initDatabase() *sqlx.DB {
 	db.SetMaxOpenConns(10)
 	db.SetMaxIdleConns(10)
 
+	logs.Info("DB conect to " + driver)
 	return db
 }

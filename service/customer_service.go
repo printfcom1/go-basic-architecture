@@ -2,9 +2,9 @@ package service
 
 import (
 	"database/sql"
-	"errors"
-	"log"
 
+	"github.com/go-architecture/errs"
+	"github.com/go-architecture/logs"
 	"github.com/go-architecture/repository"
 )
 
@@ -19,8 +19,8 @@ func NewCustomerService(custRopo repository.CostomerRepository) customerService 
 func (s customerService) GetCustomers() ([]CustomerResponse, error) {
 	customers, err := s.custRepo.GetAll()
 	if err != nil {
-		log.Panicln(err)
-		return nil, err
+		logs.Error(err)
+		return nil, errs.NewInternalServerError()
 	}
 
 	custResponses := []CustomerResponse{}
@@ -39,10 +39,10 @@ func (s customerService) GetCustomerById(id int) (*CustomerResponse, error) {
 	customer, err := s.custRepo.GetById(id)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("customer not found")
+			return nil, errs.NewNotFoundError("custormer not found")
 		}
-		log.Panicln(err)
-		return nil, err
+		logs.Error(err)
+		return nil, errs.NewInternalServerError()
 	}
 	custResponse := CustomerResponse{
 		CustomerID: customer.CustomerID,

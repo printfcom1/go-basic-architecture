@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -21,8 +20,7 @@ func NewCustomerHandler(custService service.CostomerService) customerHandler {
 func (h customerHandler) GetCustomers(w http.ResponseWriter, r *http.Request) {
 	customers, err := h.custService.GetCustomers()
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintln(w, err)
+		handleError(w, err)
 		return
 	}
 
@@ -34,8 +32,7 @@ func (h customerHandler) GetCustomerById(w http.ResponseWriter, r *http.Request)
 	customerID, _ := strconv.Atoi(mux.Vars(r)["customerID"])
 	customer, err := h.custService.GetCustomerById(customerID)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintln(w, err)
+		handleError(w, err)
 		return
 	}
 
