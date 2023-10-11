@@ -1,7 +1,7 @@
 package repository
 
 type Customer struct {
-	CustomerID  int    `db:"costomer_id"`
+	CustomerID  int    `db:"customer_id"`
 	Name        string `db:"name"`
 	DateOfBirth string `db:"date_of_birth"`
 	City        string `db:"city"`

@@ -12,7 +12,7 @@ type customerService struct {
 	custRepo repository.CostomerRepository
 }
 
-func NewCustomerService(custRopo repository.CostomerRepository) customerService {
+func NewCustomerService(custRopo repository.CostomerRepository) CostomerService {
 	return customerService{custRepo: custRopo}
 }
 

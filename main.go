@@ -22,17 +22,24 @@ func main() {
 
 	costomerRepositoryDB := repository.NewCostomerRepositoryDB(db)
 
-	costomerRepositoryMock := repository.NewCostomerRepositoryMock()
-	_ = costomerRepositoryMock
-
 	customerService := service.NewCustomerService(costomerRepositoryDB)
 
 	customerHandler := handler.NewCustomerHandler(customerService)
+
+	accountRepositoryDB := repository.NewAccountRePositoryDB(db)
+
+	accountService := service.NewAccountService(accountRepositoryDB)
+
+	accountHandler := handler.NewAccountHandler(accountService)
 
 	router := mux.NewRouter()
 
 	router.HandleFunc("/customers", customerHandler.GetCustomers).Methods(http.MethodGet)
 	router.HandleFunc("/customers/{customerID:[0-9]+}", customerHandler.GetCustomerById).Methods(http.MethodGet)
+
+	router.HandleFunc("/customers/{customerID:[0-9]+}/accounts", accountHandler.GetAccounts).Methods(http.MethodGet)
+	router.HandleFunc("/customers/{customerID:[0-9]+}/accounts", accountHandler.NewAccount).Methods(http.MethodPost)
+
 	logs.Info("server start at port 3000")
 	http.ListenAndServe(":3000", router)
 

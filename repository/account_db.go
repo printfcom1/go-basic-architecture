@@ -1,6 +1,8 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/jmoiron/sqlx"
+)
 
 type accountRePositoryDB struct {
 	db *sqlx.DB
@@ -12,7 +14,7 @@ func NewAccountRePositoryDB(db *sqlx.DB) accountRePositoryDB {
 
 func (r accountRePositoryDB) Create(acc Account) (*Account, error) {
 	query := "INSERT INTO accounts (customer_id, opening_date, account_type, amount, status) VALUES (?, ?, ?, ?, ?)"
-	result, err := r.db.DB.Exec(query, acc.AccountID, acc.OpeningDate, acc.AccountType, acc.Amount, acc.Status)
+	result, err := r.db.DB.Exec(query, acc.CustomerID, acc.OpeningDate, acc.AccountType, acc.Amount, acc.Status)
 
 	if err != nil {
 		return nil, err
